@@ -1,28 +1,30 @@
 {
-  "name": "zod-express-middleware",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.13.4",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "express": "^4.21.2",
-    "zod": "^3.24.2"
-  }
+	"name": "zod-express-middleware",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "node dist/index.js",
+		"dev": "ts-node src/index.ts",
+		"test": "jest",
+		"prettier": "prettier --write ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "^5.0.0",
+		"@types/jest": "^29.5.14",
+		"@types/node": "^22.13.4",
+		"jest": "^29.7.0",
+		"prettier": "^3.5.1",
+		"ts-jest": "^29.2.5",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"express": "^4.21.2",
+		"zod": "^3.24.2"
+	}
 }
