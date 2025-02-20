@@ -15,3 +15,9 @@ export type RequestWithSchema<T extends ZodObject<any>> = Omit<
 	query: z.infer<T>["query"];
 	body: z.infer<T>["body"];
 };
+
+export const customNumber = z
+	.custom<number>()
+	.refine((value) => value ?? false, "Required")
+	.refine((value) => Number.isFinite(Number(value)), "Invalid number")
+	.transform((value) => Number(value));

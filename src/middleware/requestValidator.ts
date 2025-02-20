@@ -12,7 +12,8 @@ export const validateRequest =
 			});
 
 			if (!result.success) {
-				throw new Error(JSON.stringify(result.error.format()));
+				res.status(400).send(result);
+				return;
 			}
 
 			//apply the validated data to the request object to apply schema defaults
