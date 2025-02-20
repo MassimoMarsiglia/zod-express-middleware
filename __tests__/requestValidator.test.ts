@@ -36,11 +36,13 @@ const TestGetRequestSchema2 = z.object({
 const app = express();
 app.use(express.json());
 
+type TestGetRequestType = RequestWithSchema<typeof TestGetRequestSchema>;
+
 app.get(
 	"/test",
 	validateRequest(TestGetRequestSchema),
-	(req: Request, res: Response) => {
-		res.send({ query: req.query, params: req.params });
+	(req: TestGetRequestType, res: Response) => {
+		res.send({ query: req.query });
 	},
 );
 
@@ -54,10 +56,12 @@ app.post(
 	},
 );
 
+type TestGetRequest2Type = RequestWithSchema<typeof TestGetRequestSchema2>;
+
 app.get(
 	"/test3",
 	validateRequest(TestGetRequestSchema2),
-	(req: Request, res: Response) => {
+	(req: TestGetRequest2Type, res: Response) => {
 		res.send({ query: req.query });
 	},
 );
@@ -108,5 +112,13 @@ describe("Request Validator Middleware", () => {
 	it("should return status 400 if a optional field is provided but not a required field", async () => {
 		const response = await request(app).get("/test3?optionalfield=hello");
 		expect(response.status).toBe(400);
+	});
+	it("should remove fields not specified in the schema from the request object", async () => {
+		const response = await request(app).get(
+			"/test3?requiredfield=hello&invalidfield=hello",
+		);
+
+		expect(response.status).toBe(200);
+		expect(response.body).toEqual({ query: { requiredfield: "hello" } });
 	});
 });
