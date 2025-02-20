@@ -1,4 +1,4 @@
-import { z, ZodObject, ZodSchema, ZodType } from "zod";
+import { z, ZodObject } from "zod";
 import { Request } from "express";
 
 export type RequestWithSchema<T extends ZodObject<any>> = Omit<Request, 'body'> & {
