@@ -44,10 +44,12 @@ app.get(
 	},
 );
 
+type TestPostRequestType = RequestWithSchema<typeof TestPostRequestSchema>;
+
 app.post(
 	"/test2/:id",
 	validateRequest(TestPostRequestSchema),
-	(req: RequestWithSchema<typeof TestPostRequestSchema>, res: Response) => {
+	(req: TestPostRequestType, res: Response) => {
 		res.send({ params: req.params, body: req.body });
 	},
 );
@@ -105,7 +107,6 @@ describe("Request Validator Middleware", () => {
 	});
 	it("should return status 400 if a optional field is provided but not a required field", async () => {
 		const response = await request(app).get("/test3?optionalfield=hello");
-		console.log(response.body);
 		expect(response.status).toBe(400);
 	});
 });
