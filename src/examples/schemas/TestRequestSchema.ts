@@ -14,4 +14,4 @@ export const testRequestSchema = z.object({
     })
 })
 
-export type testRequestType = RequestWithSchema<typeof testRequestSchema>;
+export type testRequestType<Z = undefined> = RequestWithSchema<typeof testRequestSchema, Z>;

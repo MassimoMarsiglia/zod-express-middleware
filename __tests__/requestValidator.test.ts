@@ -36,17 +36,17 @@ const TestGetRequestSchema2 = z.object({
 const app = express();
 app.use(express.json());
 
-type TestGetRequestType = RequestWithSchema<typeof TestGetRequestSchema>;
+type TestGetRequestType<Z = undefined> = RequestWithSchema<typeof TestGetRequestSchema, Z>;
 
 app.get(
 	"/test",
 	validateRequest(TestGetRequestSchema),
-	(req: TestGetRequestType, res: Response) => {
+	(req: TestGetRequestType<Request>, res: Response) => {
 		res.send({ query: req.query });
 	},
 );
 
-type TestPostRequestType = RequestWithSchema<typeof TestPostRequestSchema>;
+type TestPostRequestType<Z = undefined> = RequestWithSchema<typeof TestPostRequestSchema, Z>;
 
 app.post(
 	"/test2/:id",
@@ -56,7 +56,7 @@ app.post(
 	},
 );
 
-type TestGetRequest2Type = RequestWithSchema<typeof TestGetRequestSchema2>;
+type TestGetRequest2Type<Z = undefined> = RequestWithSchema<typeof TestGetRequestSchema2, Z>;
 
 app.get(
 	"/test3",
